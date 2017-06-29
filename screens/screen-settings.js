@@ -76,7 +76,7 @@ export default class SettingsScreen extends Component {
         </SelectContainer>
         <Label>refresh interval</Label>
         <SelectContainer>
-          {[30, 60, 120].map((invterval, i) =>
+          {[15, 30, 60, 120].map((invterval, i) =>
             <Box
               onPress={() => this.props.prices.setRefreshInterval(invterval)}
               key={i}
