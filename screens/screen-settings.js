@@ -51,6 +51,18 @@ export default class SettingsScreen extends Component {
             </Box>
           )}
         </SelectContainer>
+        <Label>native currency</Label>
+        <SelectContainer>
+          <Box disabled>
+            <Text>USD</Text>
+          </Box>
+        </SelectContainer>
+        <Label>exchange</Label>
+        <SelectContainer>
+          <Box disabled>
+            <Text>GDAX/Poloniex</Text>
+          </Box>
+        </SelectContainer>
       </Container>
     );
   }
