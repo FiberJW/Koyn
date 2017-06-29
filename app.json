@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Koyn",
+    "description": "Track your favorite cryptocurrencies on the go!",
+    "slug": "Koyn",
+    "privacy": "public",
+    "sdkVersion": "18.0.0",
+    "version": "0.1.0",
+    "androidShowExponentNotificationInShellApp": false,
+    "orientation": "portrait",
+    "primaryColor": "#ccc",
+    "icon": "./assets/icons/app.png",
+    "loading": {
+      "icon": "./assets/icons/loading.png",
+      "hideExponentText": true,
+      "backgroundColor": "#5A5376"
+    },
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4"]
+    },
+    "ios": {
+      "supportsTablet": false
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "juwan-wheatley",
+            "project": "koyn",
+            "authToken": "857ac8de5c6811e787630025902df254"
+          }
+        }
+      ]
+    }
+  }
+}
