@@ -131,7 +131,7 @@ export default class PricesStore {
     this.websocket = new ReconnectingWebsocket(WS_URL, [], {});
     this.websocket.addEventListener(
       "message",
-      _.debounce(this.updatePrice, this.refreshInterval * 1000)
+      _.throttle(this.updatePrice, this.refreshInterval * 1000)
     );
   };
 
