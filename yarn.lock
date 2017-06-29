@@ -3473,6 +3473,12 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+mobx-persist@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/mobx-persist/-/mobx-persist-0.3.3.tgz#43159148a2bd97be9ba239d7d2a2c0978a527a9c"
+  dependencies:
+    serializr "^1.1.11"
+
 mobx-react@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-4.2.1.tgz#35324834b71ae27a7553d76ad413e5f96ba40db5"
@@ -4499,6 +4505,10 @@ sentry-expo@^1.0.2:
     mkdirp "^0.5.1"
     react-native-sentry "https://github.com/expo/react-native-sentry/archive/expo-initial-release.tar.gz"
     rimraf "^2.6.1"
+
+serializr@^1.1.11:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/serializr/-/serializr-1.1.12.tgz#b3642bc3c44386f16d03cc4ea2d5356f1965b66e"
 
 serve-favicon@~2.3.0:
   version "2.3.2"

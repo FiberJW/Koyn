@@ -1,21 +1,42 @@
 import _ from "lodash";
-import { observable, computed, action, autorun } from "mobx";
+import { observable, computed, action } from "mobx";
 import { AsyncStorage, InteractionManager } from "react-native";
 import ReconnectingWebsocket from "reconnecting-websocket";
+import { create, persist } from "mobx-persist";
 
 import { currencyColors, currencyData } from "../config/currencies";
 
-const PRICES_STORE_KEY = "PRICES_STORE_KEY";
 const API_URL = "https://api.lionshare.capital";
 const WS_URL = "wss://api.lionshare.capital";
 
 export default class PricesStore {
-  @observable rateData = {};
-  @observable marketData = {};
-  @observable period = "day";
-  @observable isLoaded = false;
-  @observable error = null;
-  @observable refreshInterval = 30;
+  @persist("object")
+  @observable
+  portfolio = {};
+
+  @persist("object")
+  @observable
+  rateData = {};
+
+  @persist("object")
+  @observable
+  marketData = {};
+
+  @persist
+  @observable
+  period = "day";
+
+  @persist
+  @observable
+  isLoaded = false;
+
+  @persist
+  @observable
+  error = null;
+
+  @persist
+  @observable
+  refreshInterval = 30;
 
   /* computed */
 
@@ -147,24 +168,6 @@ export default class PricesStore {
     this.fetchData();
   };
 
-  @action
-  fromJSON = jsonData => {
-    const parsed = JSON.parse(jsonData);
-    this.rateData = parsed.rateData;
-    this.marketData = parsed.marketData;
-    if (parsed.period) this.period = parsed.period;
-    this.isLoaded = true;
-  };
-
-  /* other */
-
-  toJSON = () =>
-    JSON.stringify({
-      rateData: this.rateData,
-      marketData: this.marketData,
-      period: this.period
-    });
-
   highestPrice = currency => {
     let highestPrice = 0.0;
     if (this.isLoaded) {
@@ -197,18 +200,20 @@ export default class PricesStore {
     return this.convert(amount, currency) * this.changes[currency];
   };
 
+  @action
+  hydrate = async () => {
+    const pour = create({
+      storage: AsyncStorage
+    });
+
+    Object.keys(this).forEach(key => {
+      pour(key, this);
+    });
+  };
+
   constructor() {
     // Rehydrate store from persisted data
-    AsyncStorage.getItem(PRICES_STORE_KEY).then(data => {
-      if (data) this.fromJSON(data);
-
-      // Persist store to AsyncStorage
-      autorun(() => {
-        InteractionManager.runAfterInteractions(() => {
-          AsyncStorage.setItem(PRICES_STORE_KEY, this.toJSON());
-        });
-      });
-
+    this.hydrate().then(() => {
       this.fetchData();
       this.connectToWebsocket();
     });
