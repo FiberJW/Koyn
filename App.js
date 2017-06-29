@@ -2,6 +2,8 @@
  * @flow
  */
 
+/* eslint-disable filenames/match-regex */
+
 import React, { Component } from "react";
 import { AppLoading, Font } from "expo";
 import MainTabNavigator from "./navigation/tab-navigator-main";
@@ -9,7 +11,7 @@ import { Provider } from "mobx-react/native";
 import PricesStore from "./stores/store-prices";
 import Sentry from "sentry-expo";
 
-if (!global.__DEV__) {
+if (!__DEV__) {
   Object.keys(console).forEach(methodName => {
     console[methodName] = () => {
       /* noop */
@@ -24,6 +26,10 @@ if (!global.__DEV__) {
 export default class App extends Component {
   stores = {};
 
+  state = {
+    loaded: false
+  };
+
   componentDidMount() {
     Font.loadAsync({
       Shanti: require("./assets/fonts/Shanti.ttf"),
@@ -33,10 +39,6 @@ export default class App extends Component {
       this.setState({ loaded: true });
     });
   }
-
-  state = {
-    loaded: false
-  };
 
   render() {
     return this.state.loaded

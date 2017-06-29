@@ -1,7 +1,7 @@
 // @flow
 export default (color: string) => ({
   width: 200,
-  height: 64,
+  height: 48,
   showAreas: false,
   strokeWidth: 4,
   color,

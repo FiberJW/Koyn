@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { View, Image, TouchableOpacity } from "react-native";
+import { Image } from "react-native";
 import styled from "styled-components/native";
 import colors from "../config/colors";
 import { observer, inject } from "mobx-react/native";
@@ -16,6 +16,11 @@ const Text = styled.Text`
   font-family: ShareTechMono;
   color: white;
   font-size: 18px;
+`;
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${colors.comet};
 `;
 
 const Box = styled.TouchableOpacity`
@@ -54,17 +59,17 @@ export default class SettingsScreen extends Component {
   };
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: colors.comet }}>
+      <Container>
         <Label>time interval</Label>
         <SelectContainer>
-          {["day", "month", "year"].map((period, i) =>
+          {["hour", "day", "week", "month", "year"].map((period, i) =>
             <Box
               onPress={() => this.props.prices.selectPeriod(period)}
               key={i}
               selected={this.props.prices.period === period}
             >
               <Text>
-                1 {period}
+                {period}
               </Text>
             </Box>
           )}
@@ -83,7 +88,7 @@ export default class SettingsScreen extends Component {
             </Box>
           )}
         </SelectContainer>
-      </View>
+      </Container>
     );
   }
 }
