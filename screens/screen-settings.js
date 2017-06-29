@@ -1,44 +1,12 @@
 // @flow
 import React, { Component } from "react";
-import { Image } from "react-native";
-import styled from "styled-components/native";
-import colors from "../config/colors";
 import { observer, inject } from "mobx-react/native";
-
-const Label = styled.Text`
-  font-family: ShareTechMono;
-  color: white;
-  font-size: 18px;
-  margin-left: 16px;
-  margin-vertical: 16px;
-`;
-const Text = styled.Text`
-  font-family: ShareTechMono;
-  color: white;
-  font-size: 18px;
-`;
-
-const Container = styled.View`
-  flex: 1;
-  background-color: ${colors.comet};
-`;
-
-const Box = styled.TouchableOpacity`
-  border-width: 1px;
-  border-color: ${colors.halfWhite};
-  background-color: ${({ selected }) =>
-    selected ? colors.halfWhite : "transparent"};
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SelectContainer = styled.View`
-  height: 48px;
-  width: 100%;
-  padding-horizontal: 16px;
-  flex-direction: row;
-`;
+import Box from "../components/styled/select-box";
+import Container from "../components/styled/container-settings-screen";
+import Label from "../components/styled/text-label-settings";
+import Text from "../components/styled/text-select-title";
+import SelectContainer from "../components/styled/container-select";
+import Icon from "../components/styled/icon-tab-bar";
 
 @inject("prices")
 @observer
@@ -46,15 +14,10 @@ export default class SettingsScreen extends Component {
   static navigationOptions = {
     tabBarLabel: null,
     tabBarIcon: ({ focused, tintColor }) =>
-      <Image
+      <Icon
+        focused={focused}
+        tintColor={tintColor}
         source={require("../assets/images/icon-settings.png")}
-        style={[
-          {
-            height: 24,
-            width: 24,
-            tintColor: focused ? tintColor : colors.halfWhite
-          }
-        ]}
       />
   };
   render() {
