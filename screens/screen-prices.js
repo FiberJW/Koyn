@@ -17,7 +17,7 @@ export default class PricesScreen extends Component {
   componentDidMount() {
     const load = setInterval(() => {
       if (this.props.prices.isLoaded) {
-        setTimeout(() => this.setState({ loaded: true }), 500);
+        setTimeout(() => this.setState({ loaded: true }), 1000);
         clearInterval(load);
       }
     }, 100);
