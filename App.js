@@ -11,6 +11,7 @@ import { Provider } from "mobx-react/native";
 import PricesStore from "./stores/store-prices";
 import Sentry from "sentry-expo";
 
+// eslint-disable-next-line no-undef
 if (!__DEV__) {
   Object.keys(console).forEach(methodName => {
     console[methodName] = () => {
