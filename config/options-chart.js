@@ -1,6 +1,8 @@
 // @flow
+import { Dimensions } from "react-native";
+
 export default (color: string) => ({
-  width: 200,
+  width: Dimensions.get("window").width * 0.6,
   height: 48,
   showAreas: false,
   strokeWidth: 4,
