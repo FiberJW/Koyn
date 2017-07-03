@@ -58,7 +58,6 @@ const TotalPrice = styled.Text`
   font-family: Shanti;
   color: white;
   font-size: 36px;
-  margin-left: 8px;
 `;
 
 @inject("prices")
