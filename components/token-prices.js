@@ -6,7 +6,7 @@ import Ticker from "./ticker-prices";
 import Container from "./styled/container-token-prices";
 import { formatPrice } from "./styled/text-token-stat";
 import { SmoothLine } from "react-native-pathjs-charts";
-import chartOptions from "../config/options-chart";
+import chartOptions from "../config/options-line-chart";
 import numeral from "numeral";
 import { observer } from "mobx-react/native";
 

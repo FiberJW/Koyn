@@ -4005,6 +4005,10 @@ react-native-pathjs-charts@^0.0.29:
     paths-js "^0.4.5"
     react-native-svg "~5.2.0"
 
+react-native-pie-chart@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/react-native-pie-chart/-/react-native-pie-chart-1.0.12.tgz#0d99e9cb4cb3a4503c20a9111d499d84a99b4276"
+
 react-native-safe-module@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-module/-/react-native-safe-module-1.2.0.tgz#a23824ca24edc2901913694a76646475113d570d"
