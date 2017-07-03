@@ -5,15 +5,16 @@ import { inject, observer } from "mobx-react/native";
 import colors from "../config/colors";
 import _ from "lodash";
 import { formatPrice } from "../components/styled/text-token-stat";
-import { Dimensions, findNodeHandle } from "react-native";
+import { Dimensions, findNodeHandle, ActivityIndicator } from "react-native";
 import Ticker from "../components/ticker-prices";
 import { VictoryPie } from "victory-native";
-const Row = styled.View`
+
+const TokenContainer = styled.View`
   margin: 16px;
   flex-direction: row;
   justify-content: space-between;
 `;
-const Kon = styled.ScrollView`
+const Container = styled.ScrollView`
   background-color: ${colors.comet};
   flex: 1;
 `;
@@ -30,30 +31,7 @@ const Emoji = styled.Text`
   padding-vertical: 100px;
 `;
 
-const Container = styled.View`
-  flex: 1;
-  background-color: ${colors.comet};
-  justify-content: center;
-  align-items: center;
-`;
-
-const Header = styled.Text`
-  font-family: Shanti;
-  text-align: center;
-  font-size: 36px;
-  color: white;
-`;
-
-const Description = styled.Text`
-  margin-horizontal: 16px;
-  margin-top: 16px;
-  font-family: ShareTechMono;
-  text-align: center;
-  font-size: 24px;
-  color: ${colors.halfWhite};
-`;
-
-const Kol = styled.View`
+const TokenAmountInputContainer = styled.View`
   flex: 1;
   margin-left: 16px;
 `;
@@ -69,7 +47,7 @@ const PriceAmount = styled.Text`
   margin-left: 8px;
 `;
 
-const Yuren = styled.View`
+const PieChartInputContainer = styled.View`
   height: ${Dimensions.get("window").width}px;
   justify-content: space-around;
   align-items: center;
@@ -116,13 +94,13 @@ export default class PortfolioScreen extends Component {
     console.log(this.props.prices.portfolio);
 
     return this.props.prices.isLoaded
-      ? <Kon
+      ? <Container
           contentContainerStyle={{
             alignItems: "center"
           }}
           ref={c => (this.scrollView = c)}
         >
-          <Yuren>
+          <PieChartInputContainer>
             <TotalPrice>
               {formatPrice(totalAmount)}
             </TotalPrice>
@@ -143,18 +121,18 @@ export default class PortfolioScreen extends Component {
                   }}
                 />
               : null}
-          </Yuren>
+          </PieChartInputContainer>
           {this.props.prices.priceListData.map(s => {
             if (!(s.symbol in this.props.prices.portfolio)) {
               this.props.prices.portfolio[s.symbol] = "0.00";
             }
             return (
-              <Row key={s.symbol}>
+              <TokenContainer key={s.symbol}>
                 <Ticker ticker={s.symbol} color={s.color || "#333333"} />
                 <PriceAmount>
                   {formatPrice(s.price * this.props.prices.portfolio[s.symbol])}
                 </PriceAmount>
-                <Kol>
+                <TokenAmountInputContainer>
                   <Input
                     ref={c => (this[`input-${s.symbol}`] = c)}
                     keyboardType="numeric"
@@ -188,18 +166,14 @@ export default class PortfolioScreen extends Component {
                     underlineColorAndroid="transparent"
                   />
                   <Underline />
-                </Kol>
-              </Row>
+                </TokenAmountInputContainer>
+              </TokenContainer>
             );
           })}
           <Emoji>💰</Emoji>
-        </Kon>
+        </Container>
       : <Container>
-          <Header>oops..</Header>
-          <Description>
-            you just tried to access our portfolio feature.{"\n"}
-            stay tuned for this feature in an upcoming update.
-          </Description>
+          <ActivityIndicator />
         </Container>;
   }
 }
