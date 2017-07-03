@@ -79,8 +79,6 @@ export default class PortfolioScreen extends Component {
         const amount = parseFloat(this.props.prices.portfolio[name]);
         const priceAmount = k.price * amount;
 
-        console.log(priceAmount);
-
         sliceColor.push(k.color);
         changes.push(k.change);
         return { name, priceAmount };
@@ -89,9 +87,6 @@ export default class PortfolioScreen extends Component {
     const totalAmount = series.length
       ? series.map(x => x.priceAmount).reduce((s, v) => s + v)
       : 0;
-
-    console.log(totalAmount);
-    console.log(this.props.prices.portfolio);
 
     return this.props.prices.isLoaded
       ? <Container
