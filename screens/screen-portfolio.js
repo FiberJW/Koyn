@@ -20,6 +20,7 @@ const Container = styled.ScrollView`
 `;
 const Input = styled.TextInput`
   color: white;
+  height: 16px;
   flex: 1;
   text-align: right;
   border-bottom-width: 0.5px;
@@ -43,7 +44,7 @@ const Underline = styled.View`
 const PriceAmount = styled.Text`
   font-family: Shanti;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 8px;
 `;
 
