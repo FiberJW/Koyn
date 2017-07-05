@@ -3,7 +3,7 @@ import { observable, computed, action } from "mobx";
 import { AsyncStorage, InteractionManager } from "react-native";
 import ReconnectingWebsocket from "reconnecting-websocket";
 import { create, persist } from "mobx-persist";
-
+import Reactotron from "reactotron-react-native";
 import { currencyColors, currencyData } from "../config/currencies";
 
 const API_URL = "https://api.lionshare.capital";
@@ -102,6 +102,7 @@ export default class PricesStore {
       data = data.filter(i => currencyData(i.symbol));
     }
 
+    Reactotron.log(data);
     return data;
   }
 

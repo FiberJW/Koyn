@@ -10,6 +10,11 @@ import MainTabNavigator from "./navigation/tab-navigator-main";
 import { Provider } from "mobx-react/native";
 import PricesStore from "./stores/store-prices";
 import Sentry from "sentry-expo";
+import Reactotron from "reactotron-react-native";
+
+Reactotron.configure() // controls connection & communication settings
+  .useReactNative() // add all built-in react native plugins
+  .connect(); // let's connect!
 
 // eslint-disable-next-line no-undef
 if (!__DEV__) {
