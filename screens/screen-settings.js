@@ -37,7 +37,7 @@ export default class SettingsScreen extends Component {
             </Box>
           )}
         </SelectContainer>
-        <Label>refresh interval</Label>
+        {/* <Label>refresh interval</Label>
         <SelectContainer>
           {[15, 30, 60, 120].map((invterval, i) =>
             <Box
@@ -50,7 +50,7 @@ export default class SettingsScreen extends Component {
               </Text>
             </Box>
           )}
-        </SelectContainer>
+        </SelectContainer> */}
         <Label>native currency</Label>
         <SelectContainer>
           <Box disabled>

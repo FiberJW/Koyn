@@ -6,6 +6,7 @@ export default styled.View`
   border-bottom-right-radius: 24px;
   background-color: ${colors.tuna};
   align-items: center;
+  align-self: flex-start;
   flex-direction: row;
   justify-content: space-between;
 `;
