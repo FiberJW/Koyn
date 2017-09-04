@@ -7,13 +7,12 @@ import Container from "./styled/container-token-prices";
 import { formatPrice } from "./styled/text-token-stat";
 import { SmoothLine } from "react-native-pathjs-charts";
 import chartOptions from "../config/options-line-chart";
+import { currencyColors } from "../config/currencies";
 import numeral from "numeral";
 import { observer } from "mobx-react/native";
 
-const InfoContainer = styled.View`
-`;
-const ChartContainer = styled.View`
-`;
+const InfoContainer = styled.View``;
+const ChartContainer = styled.View``;
 
 const Price = styled.Text`
   font-family: Shanti;
@@ -31,38 +30,49 @@ const Changes = styled.Text`
 @observer
 export default class Token extends Component {
   render() {
+    const oldestDP = this.props.data.historical[0];
+    const newestDP = this.props.data.historical[
+      this.props.data.historical.length - 1
+    ];
+
+    const percentChange =
+      (newestDP.close - oldestDP.close) / oldestDP.close * 100;
+
     return (
       <Swipeable
         rightButtonWidth={100}
         rightButtons={[
-          <Stats
-            key={0}
-            market={this.props.data.marketCap}
-            high={this.props.data.highestPrice}
-            low={this.props.data.lowestPrice}
-          />
+          <Stats key={0} high={newestDP.high} low={newestDP.low} />,
         ]}
       >
         <Container>
           <InfoContainer>
             <Ticker
               ticker={this.props.data.symbol}
-              color={this.props.data.color || "#333333"}
+              color={currencyColors[this.props.data.symbol] || "#333333"}
             />
-            <Price>{formatPrice(this.props.data.price)}</Price>
-            <Changes positive={this.props.data.change > 0}>
-              {this.props.data.change > 0 && "+"}
-              {numeral(this.props.data.change).format("0.00")}%
+            <Price>
+              {formatPrice(
+                this.props.data.historical[
+                  this.props.data.historical.length - 1
+                ].close
+              )}
+            </Price>
+            <Changes positive={percentChange > 0}>
+              {percentChange > 0 && "+"}
+              {numeral(percentChange).format("0.00")}%
             </Changes>
           </InfoContainer>
           <ChartContainer>
             <SmoothLine
               data={[
-                this.props.data.chartData.datasets[0].data
-                  .slice()
-                  .map((x, y) => ({ x, y }))
+                this.props.data.historical.slice().map((x, y) => {
+                  return { x: x.close, y };
+                }),
               ]}
-              options={chartOptions(this.props.data.color || "#333333")}
+              options={chartOptions(
+                currencyColors[this.props.data.symbol] || "#333333"
+              )}
               xKey="x"
               yKey="y"
             />

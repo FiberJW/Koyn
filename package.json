@@ -11,6 +11,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "cryptocompare": "^0.1.0",
     "expo": "^18.0.4",
     "lodash": "^4.17.4",
     "mobx": "^3.1.16",
@@ -37,7 +38,7 @@
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.1.0",
     "jest-expo": "~18.0.0",
-    "prettier": "^1.4.4",
+    "prettier": "^1.6.1",
     "reactotron-react-native": "^1.11.1"
   }
 }

@@ -4,39 +4,38 @@ import { View, FlatList, ActivityIndicator } from "react-native";
 import colors from "../config/colors";
 import Token from "../components/token-prices";
 import { observer, inject } from "mobx-react/native";
+import _ from "lodash";
 
 @inject("prices")
 @observer
 export default class PricesScreen extends Component {
   static navigationOptions = {
-    tabBarLabel: "prices"
+    tabBarLabel: "prices",
   };
 
-  state = { refreshing: false, loaded: false };
-
-  componentDidMount() {
-    const load = setInterval(() => {
-      if (this.props.prices.isLoaded) {
-        setTimeout(() => this.setState({ loaded: true }), 1000);
-        clearInterval(load);
-      }
-    }, 100);
-  }
+  state = { refreshing: false };
 
   render() {
-    const { priceListData } = this.props.prices;
+    const { priceData } = this.props.prices;
+
+    const prices = _.map(priceData, (values, key) => {
+      return {
+        symbol: key,
+        historical: values.slice(),
+      };
+    });
 
     return (
       <View
         style={{
           flex: 1,
-          backgroundColor: colors.comet
+          backgroundColor: colors.comet,
         }}
       >
-        {this.state.loaded
+        {this.props.prices.isLoaded
           ? <FlatList
               keyExtractor={item => item.symbol}
-              data={priceListData}
+              data={prices}
               onRefresh={() => {
                 this.setState({ refreshing: true });
                 this.props.prices.fetchData().then(() => {
@@ -50,7 +49,7 @@ export default class PricesScreen extends Component {
               style={{
                 flex: 1,
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <ActivityIndicator size="large" />

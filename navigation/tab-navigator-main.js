@@ -8,13 +8,13 @@ import TabBar from "./tab-bar-main";
 export default tabNavigator(
   {
     Prices: { screen: PricesScreen, path: "prices" },
-    Portfolio: { screen: PortfolioScreen, path: "portfolio" },
-    Settings: { screen: SettingsScreen, path: "settings" }
+    // Portfolio: { screen: PortfolioScreen, path: "portfolio" },
+    Settings: { screen: SettingsScreen, path: "settings" },
   },
   {
     tabBarPosition: "top",
     swipeEnabled: false,
     initialRouteName: "Prices",
-    tabBarComponent: TabBar
+    tabBarComponent: TabBar,
   }
 );

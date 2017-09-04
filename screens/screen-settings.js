@@ -18,7 +18,7 @@ export default class SettingsScreen extends Component {
         focused={focused}
         tintColor={tintColor}
         source={require("../assets/images/icon-settings.png")}
-      />
+      />,
   };
   render() {
     return (
@@ -57,10 +57,10 @@ export default class SettingsScreen extends Component {
             <Text>USD</Text>
           </Box>
         </SelectContainer>
-        <Label>exchange</Label>
+        <Label>data source</Label>
         <SelectContainer>
           <Box disabled>
-            <Text>GDAX/Poloniex</Text>
+            <Text>cryptocompare.com</Text>
           </Box>
         </SelectContainer>
       </Container>

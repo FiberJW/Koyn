@@ -4,7 +4,7 @@ import Container from "./styled/container-stats-token-price";
 import Row from "./styled/container-stat-labels-and-values";
 import LabelsContainer from "./styled/container-stat-labels";
 import ValuesContainer from "./styled/container-stat-values";
-import Stat, { formatPrice, formatMarketCap } from "./styled/text-token-stat";
+import Stat, { formatPrice } from "./styled/text-token-stat";
 
 export default class TokenPriceState extends PureComponent {
   render() {
@@ -16,7 +16,6 @@ export default class TokenPriceState extends PureComponent {
           <LabelsContainer>
             <StatLabel>H</StatLabel>
             <StatLabel>L</StatLabel>
-            <StatLabel>M</StatLabel>
           </LabelsContainer>
           <ValuesContainer>
             <Stat>
@@ -24,9 +23,6 @@ export default class TokenPriceState extends PureComponent {
             </Stat>
             <Stat>
               {formatPrice(low)}
-            </Stat>
-            <Stat>
-              {formatMarketCap(market)}
             </Stat>
           </ValuesContainer>
         </Row>
